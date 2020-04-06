@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        Customize your theme here.
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
+        <item name="android:textViewStyle">@style/OpenSansTextView</item>
+        <item name="android:buttonStyle">@style/OpenSansButton</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:textViewStyle">@style/OpenSansTitle</item>
+    </style>
+
+
+    <style name="CropActivityTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
+        <item name="android:textViewStyle">@style/CropImageActivityTextView</item>
+        <item name="android:buttonStyle">@style/OpenSansButton</item>
+    </style>
+
+    <style name="CropImageActivityTextView" parent="android:Widget.Material.TextView">
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="OpenSansTextView" parent="android:Widget.Material.TextView">
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="OpenSansButton" parent="android:Widget.Button">
+        <item name="android:fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="OpenSansTitle" parent="android:Widget.Material.TextView">
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+    </style>
+
+    <style name="FabDiamondOverlay" parent="">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+</resources>

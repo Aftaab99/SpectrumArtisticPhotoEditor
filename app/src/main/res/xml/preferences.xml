@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Stylization">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="keepColors"
+            android:icon="@drawable/ic_preserve_background"
+            android:summary="Keep original colors of images and only transfer texture"
+            android:title="Preserve original colors" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="highResolution"
+            android:icon="@drawable/ic_preserve_background"
+            android:summary="Use higher resolution for stylization. Leads to slower stylization but produces higher quality images"
+            android:title="Use high resolution" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="watermark"
+            android:icon="@drawable/ic_add_watermark"
+            android:summary="Add a watermark to the image on saving"
+            android:title="Add watermark" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Social Media">
+
+        <Preference
+            android:key="instagram"
+            android:icon="@drawable/ic_instagram"
+            android:title="Instagram"
+            android:summary="\@spectrum.editor" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

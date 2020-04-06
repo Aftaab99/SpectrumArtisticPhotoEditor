@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Spectrum</string>
+    <string name="title_art">Art</string>
+    <string name="title_effects">Effects</string>
+    <string name="title_enhance">Enhance</string>
+    <string name="title_account">You</string>
+    <string name="login_id_hint">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_user_message">Create an account</string>
+    <string name="default_web_client">103229315631-dijqmg8vgq94horlrdkja678pu6ad0tm.apps.googleusercontent.com</string>
+    <string name="title_activity_launcher">Launcher</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="facebook_app_id">322966105102673</string>
+    <string name="fb_login_protocol_scheme">fb322966105102673</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>
