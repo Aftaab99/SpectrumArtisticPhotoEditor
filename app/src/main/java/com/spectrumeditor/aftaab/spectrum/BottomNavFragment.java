@@ -22,13 +22,10 @@ public class BottomNavFragment extends BottomSheetDialogFragment {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-
-                    case R.id.settings_screen:
-                        // TODO: Add setting activity
-                        Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                        startActivity(intent);
-                        return true;
+                if (item.getItemId() == R.id.settings_screen) {
+                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    startActivity(intent);
+                    return true;
                 }
                 return true;
             }

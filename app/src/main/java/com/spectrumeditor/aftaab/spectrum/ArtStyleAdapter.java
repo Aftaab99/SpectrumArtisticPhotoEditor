@@ -15,13 +15,13 @@ import java.util.List;
 public class ArtStyleAdapter extends RecyclerView.Adapter<ArtStyleAdapter.ArtListViewHolder>{
 
 
-    public static class ArtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class ArtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         TextView styleName;
         ImageView styleImage, styleStatus;
         ItemSelectListener itemSelectListener;
 
-        public ArtListViewHolder(@NonNull View itemView, ItemSelectListener itemSelectListener) {
+        ArtListViewHolder(@NonNull View itemView, ItemSelectListener itemSelectListener) {
             super(itemView);
             this.styleName = itemView.findViewById(R.id.style_name);
             this.styleImage = itemView.findViewById(R.id.style_image);
@@ -43,7 +43,7 @@ public class ArtStyleAdapter extends RecyclerView.Adapter<ArtStyleAdapter.ArtLis
     private Context context;
     private List<ArtStyle> artStyleList;
     private ArtListViewHolder.ItemSelectListener itemSelectListener;
-    public ArtStyleAdapter(Context context, List<ArtStyle> artStyleList, ArtListViewHolder.ItemSelectListener itemSelectListener) {
+    ArtStyleAdapter(Context context, List<ArtStyle> artStyleList, ArtListViewHolder.ItemSelectListener itemSelectListener) {
         this.context = context;
         this.artStyleList = artStyleList;
         this.itemSelectListener = itemSelectListener;

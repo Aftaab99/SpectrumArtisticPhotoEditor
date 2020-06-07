@@ -13,8 +13,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.List;
+import java.util.Objects;
 
-public class SettingsActivity extends AppCompatActivity {
+class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences, rootKey);
             Preference preference = findPreference("instagram");
-            if (Utility.getDevicePerformance(getActivity()).equals(Utility.DEVICE_PERF_NOT_COMPATABLE))
-                getPreferenceScreen().findPreference("highResolution").setEnabled(false);
+            if (Utility.getDevicePerformance(Objects.requireNonNull(getActivity()))==Utility.DevicePerf.DEVICE_PERF_HIGHRES_NOT_COMPATIBLE)
+                Objects.requireNonNull(getPreferenceScreen().findPreference("highResolution")).setEnabled(false);
+            assert preference != null;
             preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -47,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
                     Intent insta = new Intent(Intent.ACTION_VIEW, uri);
                     insta.setPackage("com.instagram.android");
 
-                    if (isIntentAvailable(getActivity(), insta)) {
+                    if (isIntentAvailable(Objects.requireNonNull(getActivity()), insta)) {
                         startActivity(insta);
                     } else {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/spectrum.editor")));
@@ -56,9 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-
-
-
         }
 
         private boolean isIntentAvailable(Context ctx, Intent intent) {

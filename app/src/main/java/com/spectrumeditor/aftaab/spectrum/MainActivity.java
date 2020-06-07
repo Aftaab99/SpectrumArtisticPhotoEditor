@@ -39,6 +39,7 @@ import com.vansuita.pickimage.listeners.IPickResult;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
     FloatingActionButton fab;
     Integer currentOpacity = 100;
 
-    @NonNull
     Boolean isImageSelected = false, isStyleApplied = false, isStyleBeingApplied = false;
     Bitmap originalImage, styleImage;
     LruCache<String, Bitmap> memoryCache;
@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                 }
 
                 for (int i = 0; i < styles.size(); i++) {
-                    if (!styles.get(i).getStyleName().equals(ArtStyle.ARTSTYLE_NOTAPPLIED))
-                        styles.get(i).setStyleStatus(ArtStyle.ARTSTYLE_NOTAPPLIED);
+                    if (styles.get(i).getStatus() != ArtStyle.StyleStatusType.NOT_APPLIED)
+                        styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.NOT_APPLIED);
                 }
                 adapter.notifyDataSetChanged();
 
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
 
             memoryCache = new LruCache<String, Bitmap>(cacheSize) {
                 @Override
-                protected int sizeOf(String key, Bitmap bitmap) {
+                protected int sizeOf(@NonNull String key, @NonNull Bitmap bitmap) {
                     // The cache size will be measured in kilobytes rather than
                     // number of items.
                     return bitmap.getByteCount() / 1024;
@@ -261,8 +261,6 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         if (isStyleApplied) {
             toolbar.getMenu().removeItem(R.id.toolbar_menu_crop);
@@ -282,21 +280,15 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                 opacitySeekbar.setProgress(currentOpacity);
 
                 selectedImageView.setImageBitmap(getBitmapWithAlpha(currentOpacity));
+
+                resetStyleStatus(position);
             } else {
                 if (!isStyleBeingApplied) {
-                    StylizeTask stylizeTask = new StylizeTask();
-                    String[] params = {styles.get(position).getModelName(), styles.get(position).getStyleName()};
-                    stylizeTask.execute(params);
+                    StylizeTask stylizeTask = new StylizeTask(this);
+                    stylizeTask.execute(styles.get(position).getModelName(), styles.get(position).getStyleName(), Integer.toString(position));
                 }
             }
-            for (int i = 0; i < styles.size(); i++) {
 
-                if (styles.get(i).getStatus().equals(ArtStyle.ARTSTYLE_CURRENT))
-                    styles.get(i).setStyleStatus(ArtStyle.ARTSTYLE_READY);
-                if (i == position)
-                    styles.get(i).setStyleStatus(ArtStyle.ARTSTYLE_CURRENT);
-            }
-            adapter.notifyDataSetChanged();
 
         }
 
@@ -319,14 +311,12 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
             }
 
             for (int i = 0; i < styles.size(); i++) {
-                styles.get(i).setStyleStatus(ArtStyle.ARTSTYLE_NOTAPPLIED);
+                styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.NOT_APPLIED);
             }
             adapter.notifyDataSetChanged();
             opacitySeekbar.setVisibility(View.GONE);
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.toolbar_menu);
-
-            System.out.println(String.format("Org size=%d, %d", originalImage.getWidth(), originalImage.getHeight()));
             styleImage = null;
             isStyleApplied = false;
 
@@ -347,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                 originalImage = BitmapFactory.decodeFile(resultUri.getPath());
                 selectedImageView.setImageBitmap(originalImage);
                 for (int i = 0; i < styles.size(); i++) {
-                    styles.get(i).setStyleStatus(ArtStyle.ARTSTYLE_NOTAPPLIED);
+                    styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.NOT_APPLIED);
                 }
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -360,51 +350,67 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
         }
     }
 
-    public class StylizeTask extends AsyncTask<String, Void, Void> {
+    void resetStyleStatus(int position) {
+        for (int i = 0; i < styles.size(); i++) {
 
-        private Boolean errorOccured = false;
+            if (styles.get(i).getStatus() == ArtStyle.StyleStatusType.CURRENT)
+                styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.READY);
+            if (i == position)
+                styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.CURRENT);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    private static class StylizeTask extends AsyncTask<String, Void, Void> {
+
+        private WeakReference<MainActivity> activityWeakReference;
+        private int position;
+
+        StylizeTask(MainActivity context) {
+            activityWeakReference = new WeakReference<>(context);
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-            isStyleBeingApplied = true;
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) return;
+
+            activity.progressBar.setVisibility(View.VISIBLE);
+            activity.isStyleBeingApplied = true;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (!errorOccured) {
-                opacitySeekbar.setVisibility(View.VISIBLE);
-                opacitySeekbar.setProgress(currentOpacity);
-                selectedImageView.setImageBitmap(getBitmapWithAlpha(currentOpacity));
-                isStyleApplied = true;
-                toolbar.getMenu().removeItem(R.id.toolbar_menu_crop);
-                toolbar.invalidate();
-                isStyleBeingApplied = false;
-                progressBar.setVisibility(View.INVISIBLE);
-            } else {
-                isStyleBeingApplied = false;
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(MainActivity.this, "Couldn't connect to server", Toast.LENGTH_LONG).show();
-            }
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) return;
+
+            activity.opacitySeekbar.setVisibility(View.VISIBLE);
+            activity.opacitySeekbar.setProgress(activity.currentOpacity);
+            activity.selectedImageView.setImageBitmap(activity.getBitmapWithAlpha(activity.currentOpacity));
+            activity.isStyleApplied = true;
+            activity.toolbar.getMenu().removeItem(R.id.toolbar_menu_crop);
+            activity.toolbar.invalidate();
+            activity.isStyleBeingApplied = false;
+            activity.progressBar.setVisibility(View.INVISIBLE);
+            activity.resetStyleStatus(position);
         }
 
 
         @Override
         protected Void doInBackground(String... strings) {
 
-            Stylize stylize = new Stylize(strings[0], MainActivity.this);
-            Bitmap result = stylize.stylizeImage(MainActivity.this, originalImage);
-            System.out.println(String.format("Result image size=(%d,%d)", result.getWidth(), result.getHeight()));
-            if (result != null) {
-                styleImage = result;
-                addBitmapToMemoryCache(strings[0], styleImage);
-                styleImage = Bitmap.createScaledBitmap(styleImage, originalImage.getWidth(), originalImage.getHeight(), true);
-                currentOpacity = styleOpacities.get(strings[1]);
-                currentStyle = strings[1];
-            } else
-                errorOccured = true;
+            MainActivity activity = activityWeakReference.get();
+            if (activity == null || activity.isFinishing()) return null;
+
+            Stylize stylize = new Stylize(strings[0], activity);
+            this.position = Integer.parseInt(strings[2]);
+            activity.styleImage = stylize.stylizeImage(activity, activity.originalImage);
+            activity.addBitmapToMemoryCache(strings[0], activity.styleImage);
+            activity.styleImage = Bitmap.createScaledBitmap(activity.styleImage, activity.originalImage.getWidth(), activity.originalImage.getHeight(), true);
+            activity.currentOpacity = activity.styleOpacities.get(strings[1]);
+            activity.currentStyle = strings[1];
             return null;
         }
 
@@ -425,6 +431,7 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setContentView(R.layout.activity_main);
+
         fab = findViewById(R.id.open_select_fab);
         appBar = findViewById(R.id.appbar);
         selectedImageView = findViewById(R.id.selectImage);
@@ -513,8 +520,9 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
             stylesRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         }
-        ArtStyleAdapter adapter = new ArtStyleAdapter(this, styles, this);
+        adapter = new ArtStyleAdapter(this, styles, this);
         stylesRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         stylesRecyclerView.setVisibility(View.VISIBLE);
         if (memoryCache == null) {
             final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
@@ -524,17 +532,23 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
 
             memoryCache = new LruCache<String, Bitmap>(cacheSize) {
                 @Override
-                protected int sizeOf(String key, Bitmap bitmap) {
+                protected int sizeOf(@NonNull String key, @NonNull Bitmap bitmap) {
                     // The cache size will be measured in kilobytes rather than
                     // number of items.
                     return bitmap.getByteCount() / 1024;
                 }
 
                 @Override
-                protected void entryRemoved(boolean evicted, String key, Bitmap oldBitmap, Bitmap newBitmap) {
+                protected void entryRemoved(boolean evicted, @NonNull String key, @NonNull Bitmap oldBitmap, Bitmap newBitmap) {
+                    for (int i = 0; i < styles.size(); i++) {
+                        if (key.equals(styles.get(i).getModelName())) {
+                            styles.get(i).setStyleStatus(ArtStyle.StyleStatusType.NOT_APPLIED);
+                        }
+                    }
                     if (oldBitmap != styleImage) {
                         oldBitmap.recycle();
                     }
+                    adapter.notifyDataSetChanged();
                 }
             };
 

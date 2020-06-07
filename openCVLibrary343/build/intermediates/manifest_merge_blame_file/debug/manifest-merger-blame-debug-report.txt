@@ -6,25 +6,25 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-9        android:targetSdkVersion="28" />
-9-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+8-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.CAMERA" />
-11-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:5-65
-11-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:22-62
+11-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:5-65
+11-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:22-62
 12
 13    <uses-feature
-13-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:9:5-11:36
+13-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:9:5-11:36
 14        android:name="android.hardware.camera"
-14-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:10:9-47
+14-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:10:9-47
 15        android:required="false" />
-15-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:11:9-33
+15-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:11:9-33
 16    <uses-feature
-16-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:13:5-15:36
+16-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:13:5-15:36
 17        android:name="android.hardware.camera.front"
-17-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:14:9-53
+17-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:14:9-53
 18        android:required="false" />
-18-->/home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:15:9-33
+18-->/home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:15:9-33
 19
 20</manifest>

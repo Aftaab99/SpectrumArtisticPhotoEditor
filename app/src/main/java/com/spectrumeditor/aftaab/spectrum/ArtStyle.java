@@ -1,50 +1,46 @@
 package com.spectrumeditor.aftaab.spectrum;
 
-public class ArtStyle {
+class ArtStyle {
     private String styleName;
-    private String status;
     private int styleResource;
     private String styleModelName;
+    enum StyleStatusType {READY, CURRENT, NOT_APPLIED}
+    private StyleStatusType status;
 
-    public static final String ARTSTYLE_READY = "READY";
-    public static final String ARTSTYLE_CURRENT = "CURRENT";
-    public static final String ARTSTYLE_NOTAPPLIED = "NOT_APPLIED";
-
-    public ArtStyle(String styleName, String status, int styleResource, String styleModelName) {
+    ArtStyle(String styleName, int styleResource, String styleModelName) {
         this.styleName = styleName;
-        this.status = status;
+        this.status = StyleStatusType.NOT_APPLIED;
         this.styleModelName = styleModelName;
         this.styleResource = styleResource;
     }
 
-    public String getStatus() {
+    StyleStatusType getStatus() {
         return status;
     }
 
-    public void setStyleStatus(String status) {
-        if (status.equals(ARTSTYLE_READY) || status.equals(ARTSTYLE_CURRENT) || status.equals(ARTSTYLE_NOTAPPLIED))
-            this.status = status;
+    void setStyleStatus(StyleStatusType s) {
+        this.status = s;
     }
 
-    public String getStyleName() {
+    String getStyleName() {
         return styleName;
     }
 
-    public int getStatusResource() {
+    int getStatusResource() {
 
-        if (status.equals(ARTSTYLE_CURRENT))
+        if (status == StyleStatusType.CURRENT)
             return R.drawable.ic_style_current;
-        else if (status.equals(ARTSTYLE_READY))
+        else if (status == StyleStatusType.READY)
             return R.drawable.ic_style_ready;
         else
             return R.drawable.ic_style_not_applied;
     }
 
-    public String getModelName() {
+    String getModelName() {
         return styleModelName;
     }
 
-    public int getStyleResource() {
+    int getStyleResource() {
         return styleResource;
     }
 }

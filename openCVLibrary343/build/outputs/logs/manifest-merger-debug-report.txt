@@ -1,53 +1,53 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:1-18:12
 	package
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:3:5-25
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:3:5-25
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:5:5-32
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:5:5-32
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:4:5-31
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:4:5-31
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 uses-permission#android.permission.CAMERA
-ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:5-65
+ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:5-65
 	android:name
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:22-62
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:7:22-62
 uses-feature#android.hardware.camera
-ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:9:5-11:36
+ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:9:5-11:36
 	android:required
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:11:9-33
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:11:9-33
 	android:name
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:10:9-47
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:10:9-47
 uses-feature#android.hardware.camera.front
-ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:13:5-15:36
+ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:13:5-15:36
 	android:required
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:15:9-33
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:15:9-33
 	android:name
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:14:9-53
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml:14:9-53
 uses-sdk
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		ADDED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
-		INJECTED from /home/aftaab/PycharmProjects/Spectrum/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		ADDED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml
+		INJECTED from /home/aftaab/Projects/Spectrum-Photo-Editor/openCVLibrary343/src/main/AndroidManifest.xml

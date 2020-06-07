@@ -29,20 +29,19 @@ class Stylize {
     private int height;
     private Context context;
 
-    public Stylize(String model_name, Context ctx) {
+    Stylize(String model_name, Context ctx) {
 
         this.width = 288;
         this.height = 384;
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
-        if (Utility.getDevicePerformance(ctx) >= Utility.DEVICE_PERF_COMPATABLE_CPU && preferences.getBoolean("highResolution", true)) {
+        if (Utility.getDevicePerformance(ctx) != Utility.DevicePerf.DEVICE_PERF_HIGHRES_NOT_COMPATIBLE && preferences.getBoolean("highResolution", true)) {
             width = 384;
             height = 512;
         }
         this.modelPath = model_name.split("_")[0] + String.format("_%s.tflite", this.height);
         this.styleIndex = Integer.parseInt(model_name.split("_")[1]);
-//        this.useGPU = Utility.getDevicePerformance(ctx).equals(Utility.DEVICE_PERF_COMPATABLE_GPU);
-
+//        this.useGPU = Utility.getDevicePerformance(ctx) == Utility.DevicePerf.DEVICE_PERF_COMPATIBLE_GPU;
         this.useGPU = false;
         this.context = ctx;
     }
@@ -90,7 +89,7 @@ class Stylize {
         return output;
     }
 
-    public Bitmap stylizeImage(Activity activity, Bitmap source) {
+    Bitmap stylizeImage(Activity activity, Bitmap source) {
 
         Bitmap sourceImage = Bitmap.createScaledBitmap(source, width, height, true);
         try {
@@ -119,7 +118,7 @@ class Stylize {
             interpreter.runForMultipleInputsOutputs(new Object[]{inputArray, styleIndexArray}, outputMap);
             System.out.println("Elapsed inference time:" + (System.currentTimeMillis() - start));
 
-            if (useGPU)
+            if (useGPU && delegate!=null)
                 delegate.close();
 
             interpreter.close();

@@ -7,20 +7,20 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class PreserveColors {
+class PreserveColors {
 
-    int width, height;
+    private int width, height;
 
     static {
         System.loadLibrary("opencv_java3");
     }
 
-    public PreserveColors(int width, int height) {
+    PreserveColors(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public Bitmap transferLuminosity(Bitmap orgImageBitmap, Bitmap styImageBitmap) {
+    Bitmap transferLuminosity(Bitmap orgImageBitmap, Bitmap styImageBitmap) {
 
         Mat originalMat = new Mat(height, width, CvType.CV_8UC3);
         Mat styleMat = new Mat(height, width, CvType.CV_8UC3);
