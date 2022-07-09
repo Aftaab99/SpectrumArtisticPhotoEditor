@@ -32,9 +32,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class Utility {
 
     enum DevicePerf {DEVICE_PERF_HIGHRES_NOT_COMPATIBLE, DEVICE_PERF_COMPATIBLE_CPU,
-            DEVICE_PERF_COMPATIBLE_GPU}
+            DEVICE_PERF_COMPATIBLE_GPU};
 
-     private static int getOpenGLVersion(Context context) {
+    private static int getOpenGLVersion(Context context) {
         ActivityManager activityManager =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo configInfo = activityManager.getDeviceConfigurationInfo();

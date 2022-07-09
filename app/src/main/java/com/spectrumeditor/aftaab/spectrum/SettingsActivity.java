@@ -15,7 +15,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.util.List;
 import java.util.Objects;
 
-class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
