@@ -7,6 +7,12 @@
 .DS_Store
 /build
 /captures
+/app/build
+/app/release
+/app/debug
+/app/.externalNativeBuild
+openCVLibrary343/build/
 .externalNativeBuild
-openCVLibrary341/
+openCVLibrary341/*
+.idea/
 import-summary.txt

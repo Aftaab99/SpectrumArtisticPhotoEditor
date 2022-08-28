@@ -37,11 +37,11 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences, rootKey);
-            Preference preference = findPreference("instagram");
+            Preference instagramPreference = findPreference("instagram");
             if (Utility.getDevicePerformance(Objects.requireNonNull(getActivity()))==Utility.DevicePerf.DEVICE_PERF_HIGHRES_NOT_COMPATIBLE)
                 Objects.requireNonNull(getPreferenceScreen().findPreference("highResolution")).setEnabled(false);
-            assert preference != null;
-            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            assert instagramPreference != null;
+            instagramPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
 

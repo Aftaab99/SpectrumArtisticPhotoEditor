@@ -37,7 +37,6 @@ class Items {
         styles.add(new ArtStyle("Weeping Woman", R.drawable.weeping_woman, "paintings_17"));
 
         styles.add(new ArtStyle("Church", R.drawable.church, "sketchs_0"));
-        styles.add(new ArtStyle("Doodle", R.drawable.doodle, "sketchs_1"));
         styles.add(new ArtStyle("Pencil", R.drawable.pencil, "sketchs_2"));
         styles.add(new ArtStyle("Sketch", R.drawable.sketch, "sketchs_3"));
 

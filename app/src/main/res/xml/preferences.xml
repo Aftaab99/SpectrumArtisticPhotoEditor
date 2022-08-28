@@ -34,5 +34,15 @@
             android:title="Instagram"
             android:summary="\@spectrum.editor" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:key="privacy_policy"
+            android:icon="@drawable/ic_link_solid"
+            android:title="Privacy Policy"
+            android:summary="View privacy policy" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://spectrum-1a19f.web.app/privacypolicy.html" />
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>
