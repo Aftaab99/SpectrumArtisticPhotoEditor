@@ -5,5 +5,9 @@
             android:id="@+id/settings_screen"
             android:icon="@drawable/ic_settings"
             android:title="Settings" />
+        <item
+            android:id="@+id/about_screen"
+            android:icon="@drawable/ic_about"
+            android:title="About" />
     </group>
 </menu>

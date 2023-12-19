@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
@@ -39,7 +38,6 @@ import com.vansuita.pickimage.listeners.IPickResult;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
     Integer currentOpacity = 100;
 
     Boolean isImageSelected = false, isStyleApplied = false, isStyleBeingApplied = false;
-    Bitmap originalImage, styleImage;
+    Bitmap originalImage, styleImage, styleImageWithOpacity;
     LruCache<String, Bitmap> memoryCache;
     BottomAppBar appBar;
     Toolbar toolbar;
@@ -149,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                         if (styleImage != null) {
                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                             boolean isWaterMarkEnabled = sharedPreferences.getBoolean("watermark", true);
-                            Bitmap styleImageWithAlpha = getBitmapWithAlpha(currentOpacity);
+                            Bitmap styleImageWithAlpha = styleImageWithOpacity;
 
                             if (isWaterMarkEnabled) {
                                 styleImageWithAlpha = Utility.addWaterMark(styleImageWithAlpha, MainActivity.this);
@@ -176,8 +174,8 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 currentOpacity = progress;
                 styleOpacities.put(currentStyle, currentOpacity);
-                selectedImageView.setImageBitmap(getBitmapWithAlpha(progress));
-            }
+                UpdateOpacityTask updateOpacityTask = new UpdateOpacityTask(MainActivity.this);
+                updateOpacityTask.execute(new UpdateOpacityTaskParams(originalImage, styleImage, currentOpacity));            }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -247,17 +245,6 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
 
     }
 
-    public Bitmap getBitmapWithAlpha(int opacity) {
-        float scaledOpacity = Utility.scaleOpacity(opacity);
-        Bitmap bmOverlay = Bitmap.createBitmap(originalImage.getWidth(), originalImage.getHeight(), originalImage.getConfig());
-        Canvas canvas = new Canvas(bmOverlay);
-        canvas.drawBitmap(originalImage, new Matrix(), null);
-        Paint paint = new Paint();
-        paint.setAlpha((int) scaledOpacity);
-        canvas.drawBitmap(styleImage, new Matrix(), paint);
-        return bmOverlay;
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -279,7 +266,8 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                 currentStyle = styles.get(position).getStyleName();
                 opacitySeekbar.setProgress(currentOpacity);
 
-                selectedImageView.setImageBitmap(getBitmapWithAlpha(currentOpacity));
+                UpdateOpacityTask updateOpacityTask = new UpdateOpacityTask(this);
+                updateOpacityTask.execute(new UpdateOpacityTaskParams(this.originalImage, this.styleImage, this.currentOpacity));
 
                 resetStyleStatus(position);
             } else {
@@ -361,60 +349,6 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
         adapter.notifyDataSetChanged();
     }
 
-    private static class StylizeTask extends AsyncTask<String, Void, Void> {
-
-        private WeakReference<MainActivity> activityWeakReference;
-        private int position;
-
-        StylizeTask(MainActivity context) {
-            activityWeakReference = new WeakReference<>(context);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            MainActivity activity = activityWeakReference.get();
-            if (activity == null || activity.isFinishing()) return;
-
-            activity.progressBar.setVisibility(View.VISIBLE);
-            activity.isStyleBeingApplied = true;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            MainActivity activity = activityWeakReference.get();
-            if (activity == null || activity.isFinishing()) return;
-
-            activity.opacitySeekbar.setVisibility(View.VISIBLE);
-            activity.opacitySeekbar.setProgress(activity.currentOpacity);
-            activity.selectedImageView.setImageBitmap(activity.getBitmapWithAlpha(activity.currentOpacity));
-            activity.isStyleApplied = true;
-            activity.toolbar.getMenu().removeItem(R.id.toolbar_menu_crop);
-            activity.toolbar.invalidate();
-            activity.isStyleBeingApplied = false;
-            activity.progressBar.setVisibility(View.INVISIBLE);
-            activity.resetStyleStatus(position);
-        }
-
-
-        @Override
-        protected Void doInBackground(String... strings) {
-
-            MainActivity activity = activityWeakReference.get();
-            if (activity == null || activity.isFinishing()) return null;
-
-            Stylize stylize = new Stylize(strings[0], activity);
-            this.position = Integer.parseInt(strings[2]);
-            activity.styleImage = stylize.stylizeImage(activity, activity.originalImage);
-            activity.addBitmapToMemoryCache(strings[0], activity.styleImage);
-            activity.styleImage = Bitmap.createScaledBitmap(activity.styleImage, activity.originalImage.getWidth(), activity.originalImage.getHeight(), true);
-            activity.currentOpacity = activity.styleOpacities.get(strings[1]);
-            activity.currentStyle = strings[1];
-            return null;
-        }
-
-    }
 
 
     public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
@@ -477,9 +411,8 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
                         }
                         break;
                     case R.id.toolbar_menu_save:
-                        if (styleImage != null) {
-                            Bitmap styleImageWithAlpha = getBitmapWithAlpha(currentOpacity);
-                            Utility.saveToInternalStorage(styleImageWithAlpha, MainActivity.this);
+                        if (styleImageWithOpacity != null) {
+                            Utility.saveToInternalStorage(styleImageWithOpacity, MainActivity.this);
                         } else
                             Utility.saveToInternalStorage(originalImage, MainActivity.this);
                         break;
@@ -568,7 +501,8 @@ public class MainActivity extends AppCompatActivity implements ArtStyleAdapter.A
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 currentOpacity = progress;
                 styleOpacities.put(currentStyle, currentOpacity);
-                selectedImageView.setImageBitmap(getBitmapWithAlpha(progress));
+                UpdateOpacityTask updateOpacityTask = new UpdateOpacityTask(MainActivity.this);
+                updateOpacityTask.execute(new UpdateOpacityTaskParams(originalImage, styleImage, currentOpacity));
             }
 
             @Override

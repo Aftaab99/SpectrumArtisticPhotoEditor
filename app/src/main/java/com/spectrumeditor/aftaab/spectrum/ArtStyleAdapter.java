@@ -14,6 +14,9 @@ import java.util.List;
 
 public class ArtStyleAdapter extends RecyclerView.Adapter<ArtStyleAdapter.ArtListViewHolder>{
 
+    private Context context;
+    private List<ArtStyle> artStyleList;
+    private ArtListViewHolder.ItemSelectListener itemSelectListener;
 
     static class ArtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
@@ -40,9 +43,6 @@ public class ArtStyleAdapter extends RecyclerView.Adapter<ArtStyleAdapter.ArtLis
         }
     }
 
-    private Context context;
-    private List<ArtStyle> artStyleList;
-    private ArtListViewHolder.ItemSelectListener itemSelectListener;
     ArtStyleAdapter(Context context, List<ArtStyle> artStyleList, ArtListViewHolder.ItemSelectListener itemSelectListener) {
         this.context = context;
         this.artStyleList = artStyleList;

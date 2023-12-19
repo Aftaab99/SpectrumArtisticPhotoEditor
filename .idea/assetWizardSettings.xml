@@ -140,7 +140,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/opt/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_photo_library_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/home/aftaab/applications/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_info_outline_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -150,9 +150,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="63a4ff" />
-                            <entry key="outputName" value="ic_photoalbum" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/glyphlogo_may2016_onlinev2/GlyphLogo_May2016_Onlinev2/IG_Glyph_Fill.psd" />
+                            <entry key="outputName" value="ic_about" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/link-solid.svg" />
                           </map>
                         </option>
                       </PersistentState>

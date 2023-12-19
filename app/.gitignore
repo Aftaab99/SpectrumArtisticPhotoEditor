@@ -1,1 +1,10 @@
 /build
+app/build/
+app/debug/
+app/release/
+
+
+openCVLibrary343/build/
+openCVLibrary343/debug/
+openCVLibrary343/release/
+.idea/
